@@ -6,4 +6,5 @@ app_name = "main"
 
 urlpatterns = [
     # TODO 3: petakan path "books/" ke book_list dengan nama "book_list".
+    path("books/", book_list, name="book_list"),
 ]
