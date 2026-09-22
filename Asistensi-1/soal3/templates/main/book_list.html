@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><title>Katalog</title></head>
+<body>
+<h1>Katalog Pojok Baca</h1>
+{% for book in books %}
+    <article>
+        <h2>{{ book.title }}</h2>
+        <p>Penulis: {{ book.author }}</p>
+        {% if book.is_available %}<p>Tersedia</p>{% else %}<p>Stok habis</p>{% endif %}
+    </article>
+{% empty %}
+    <p>Belum ada buku.</p>
+{% endfor %}
+</body>
+</html>

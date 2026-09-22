@@ -1,0 +1,4 @@
+[
+  {"model": "main.book", "pk": 1, "fields": {"title": "Django untuk Pemula", "author": "Alya", "stock": 4}},
+  {"model": "main.book", "pk": 2, "fields": {"title": "Web yang Terstruktur", "author": "Bima", "stock": 0}}
+]
