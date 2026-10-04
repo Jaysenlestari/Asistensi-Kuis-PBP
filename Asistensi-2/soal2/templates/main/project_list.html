@@ -9,7 +9,10 @@
 {% else %}<a href="{% url 'main:login' %}">Login</a>{% endif %}
 
 <!-- TODO 5A: tampilkan tombol create hanya bagi role Owner. -->
-<a id="create-control" href="{% url 'main:create_project' %}">Tambah Project</a>
+{% comment %} <a id="create-control" href="{% url 'main:create_project' %}">Tambah Project</a> {% endcomment %}
+{% if user.is_owner %}
+  <a id="create-control" href="{% url 'main:create_project' %}">Tambah Project</a>
+{% endif %}
 
 {% for project in projects %}
 <article>
@@ -25,10 +28,15 @@
   {% endif %}
 
   <!-- TODO 5B: edit hanya bagi Editor/Owner; delete hanya bagi Owner. -->
+  {% if user.is_owner or user.is_editor %}
   <a class="edit-control" href="{% url 'main:edit_project' project.id %}">Edit</a>
+  {% endif %}
+
+  {% if user.is_owner %}
   <form class="delete-control" method="post" action="{% url 'main:delete_project' project.id %}">
     {% csrf_token %}<button type="submit">Delete</button>
   </form>
+  {% endif %}
 </article>
 {% empty %}<p>Belum ada project.</p>{% endfor %}
 </body>
