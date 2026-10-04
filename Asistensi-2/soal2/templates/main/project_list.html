@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><title>Campus Showcase</title></head>
+<body>
+<h1>Campus Showcase</h1>
+{% if user.is_authenticated %}
+  <p>Masuk sebagai {{ user.username }}</p>
+  <form method="post" action="{% url 'main:logout' %}">{% csrf_token %}<button>Logout</button></form>
+{% else %}<a href="{% url 'main:login' %}">Login</a>{% endif %}
+
+<!-- TODO 5A: tampilkan tombol create hanya bagi role Owner. -->
+<a id="create-control" href="{% url 'main:create_project' %}">Tambah Project</a>
+
+{% for project in projects %}
+<article>
+  <h2>{{ project.title }}</h2>
+  <p>{{ project.description }}</p>
+  <p class="star-count">{{ project.starred_by.count }} star</p>
+
+  {% if user.is_authenticated %}
+  <form method="post" action="{% url 'main:toggle_star' project.id %}">
+    {% csrf_token %}
+    <button type="submit">{% if user in project.starred_by.all %}Unstar{% else %}Star{% endif %}</button>
+  </form>
+  {% endif %}
+
+  <!-- TODO 5B: edit hanya bagi Editor/Owner; delete hanya bagi Owner. -->
+  <a class="edit-control" href="{% url 'main:edit_project' project.id %}">Edit</a>
+  <form class="delete-control" method="post" action="{% url 'main:delete_project' project.id %}">
+    {% csrf_token %}<button type="submit">Delete</button>
+  </form>
+</article>
+{% empty %}<p>Belum ada project.</p>{% endfor %}
+</body>
+</html>

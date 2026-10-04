@@ -1,0 +1,4 @@
+[
+  {"model": "main.project", "pk": 1, "fields": {"title": "Portal Kegiatan Kampus", "description": "Informasi kegiatan mahasiswa.", "starred_by": []}},
+  {"model": "main.project", "pk": 2, "fields": {"title": "Peta Ruang Belajar", "description": "Pencarian ruang belajar kosong.", "starred_by": []}}
+]

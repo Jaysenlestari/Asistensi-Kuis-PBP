@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><title>Form Project</title></head>
+<body>
+<h1>{{ heading }}</h1>
+<form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Simpan</button></form>
+<a href="{% url 'main:project_list' %}">Kembali</a>
+</body></html>

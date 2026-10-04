@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><title>Dashboard Preferensi</title></head>
+<body class="theme-{{ theme }}">
+<h1>Halo, {{ user.username }}</h1>
+<p id="visit-count">Dashboard telah dikunjungi {{ visit_count }} kali pada session ini.</p>
+<p id="theme-status">Tema aktif: {{ theme }}</p>
+
+<!-- TODO 5A: tampilkan bagian ini hanya jika announcement_dismissed bernilai False. -->
+<section id="announcement">
+  <p>Pengumpulan proyek ditutup Jumat pukul 21.00 WIB.</p>
+  <form method="post" action="{% url 'main:dismiss_announcement' %}">
+    {% csrf_token %}<button type="submit">Tutup Pengumuman</button>
+  </form>
+</section>
+
+<form method="post" action="{% url 'main:set_theme' %}">
+  {% csrf_token %}
+  <button type="submit" name="theme" value="light">Tema Light</button>
+  <button type="submit" name="theme" value="dark">Tema Dark</button>
+</form>
+
+<form method="post" action="{% url 'main:reset_preferences' %}">
+  {% csrf_token %}<button type="submit">Reset Preferensi</button>
+</form>
+<form method="post" action="{% url 'main:logout' %}">
+  {% csrf_token %}<button type="submit">Logout</button>
+</form>
+</body>
+</html>

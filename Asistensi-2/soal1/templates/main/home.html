@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><title>Campus Showcase</title></head>
+<body>
+    <h1>Campus Showcase</h1>
+    {% if user.is_authenticated %}
+        <p id="login-status">Masuk sebagai {{ user.username }}</p>
+        <p id="last-login">Login terakhir: {{ last_login|default:"Belum tersedia" }}</p>
+        <form method="post" action="{% url 'main:logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <p id="login-status">Belum login</p>
+        <a href="{% url 'main:login' %}">Login</a>
+        <a href="{% url 'main:register' %}">Register</a>
+    {% endif %}
+</body>
+</html>
